@@ -1,12 +1,13 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from streamlit_extras.dataframe_explorer import dataframe_explorer
 import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 import pydeck as pdk
-from webconfig import chat_map
+from webconfig import chat_map,tipos_comida_chart
 import webbrowser
+
+
 
 data=pd.read_csv("./data_restaurantes_final.csv", sep=";", encoding="utf-8")
 
@@ -23,84 +24,138 @@ with image:
     st.image("img/logo_the_fork_trans.png", width=200)
 
 with col_menu:
-    selected = option_menu(None, ["Inicio","Scraping","AED", "Conclusiones", 'Buscador','Modelo IA'], 
+    selected = option_menu(None, ["Inicio","Datos","AED", "Conclusiones", 'Buscador','Modelo IA'], 
         icons=['house','database-down' ,'graph-up', "folder2-open", 'search','app-indicator'], 
         menu_icon="cast", default_index=0, orientation="horizontal")
 
-
+###############
+#PAGINA INICIO#
+###############
 if selected == "Inicio":
-    st.info("Bienvenido al proyecto de Restaurantes")
-    st.error("Hola")
-    pass
+    st.info("Algún mensaje de Bienvenida???")
+    col1, col2=st.columns(2)
+    with col1:
+        st.info("Nuestro Equipo")
+        st.image("img/componentes_grupo.png", use_column_width=True)
 
-elif selected == "Scraping":
+    
+    with col2:
+        st.info("Nuestro Objetivo")
+        st.markdown("**¿Cúal es nuestro objetivo principal?**")
+        st.write("- Comprobar si existe una relación entre al precio medio del restaurante y características como su localización, renta per cápita, tipo de comida etc.​")
+        st.markdown("**¿Cuáles son nuestros objetivos específicos?**")
+        st.write("- Objetivo 1")
+        st.write("- Objetivo 2")
+        st.write("- Objetivo 3")
+        st.write("- Objetivo 4")
+        st.write("- Objetivo 5")
+    
+    st.info("Alcance")
+    if st.button("Informe detallado del alcance", use_container_width=True):
+                webbrowser.open_new_tab("www.sincronity.com")
+    st.info("Cronograma")
+    st.image("img/cronograma.png", use_column_width=True)
+    if st.button("Accede a nuestro cronograma", use_container_width=True):
+                webbrowser.open_new_tab("www.sincronity.com")
+elif selected == "Datos":
     
     col1, col2 = st.columns(2)
     with col1:
         container1 = st.container()
-        container1.info("OBTENCIÓN DE DATOS")
-        if st.button("Ver repositorio en GitHub"):
-            webbrowser.open_new_tab("www.sincronity.com")
-
-        st.markdown("- **Web scrapping** de la página de The Fork")
-        st.markdown("- Tecnologías empleadas:")
-        st.markdown("- Python, BeautifulSoup, Request, JSON")
-
+        container1.subheader("OBTENCIÓN DE DATOS")
         container1.image("img/webscrapping.png", use_column_width=True)
+        tabla_webscrapping=pd.DataFrame({"BBDD":["Restaurantes","Población por Provincia","Salarios medios anuales"],"Obtención":["Scrapping THE FORK","INE","INE"],"Comentarios":["Python, Selenium,BeautifulSoup, Request, JSON","Sin datos faltantes","Datos faltantes"]})
+        container1.table(tabla_webscrapping)
 
+        col11, col12 = container1.columns(2)
+        with col11:
+            st.metric("Nº Restaurantes", "7562")
+            if st.button("CÓDIGO DEL WEBSCRAPING Y DATOS", use_container_width=True):
+                webbrowser.open_new_tab("www.sincronity.com")
+        with col12:
+            st.metric("Nº variables", "27") 
+            if st.button("INFORME ADQUISICIÓN Y LIMPIEZA DE DATOS", use_container_width=True):
+                webbrowser.open_new_tab("www.sincronity.com")
 
     with col2:
         container2 = st.container()
-        container2.info("PROCEDIMIENTO DE LIMPIEZA Y TRANSFORMACIÓN DE DATOS")
-        container2.image("img/webscrapping.png", use_column_width=True)
+        container2.subheader("LIMPIEZA Y TRANSFORMACIÓN DE DATOS")
+        container2.image("img/restaurant_analysis.png", use_column_width=True)
+        container2.info("_Datos faltantes_")
+        container2.info("_Datos anómalos_")
+        container2.info("_Algún tipo de dato más?_")
 
 
 elif selected == "AED":
-    pass
+    st.title("Análisis Univariante")
+
+    st.title("Análisis Multivariante")
 
 
 
 elif selected == "Conclusiones":
-    pass
+    st.title("Recordamos los objetivos y respondemos a cada uno de ellos")
 
 elif selected == "Buscador":
+    st.divider()
     #Análisis de la competencia de una sola provincia
-    st.info("ANALIZE A TODA LA COMPETENCIA DE SU PROVINCIA")
+    st.subheader("Analice a toda la competencia de su provincia")
+    # st.info("ANALIZE A TODA LA COMPETENCIA DE SU PROVINCIA")
     col1, col2, col3 = st.columns(3)
     with col1:
-        provincia_input= st.selectbox("Seleccione su provincia", sorted(data["Provincia"].unique()), index=6)
-        chat_map(data[data["Provincia"]==provincia_input][["Longitude","Latitude"]], data[data["Provincia"]==provincia_input]["Longitude"].median(), data[data["Provincia"]==provincia_input]["Latitude"].median())
+        with st.expander("Opciones de Filtro"):
+            provincia_input= st.selectbox("Seleccione su provincia", sorted(data["Provincia"].unique()), index=6)
+            filtro_michelin=st.radio("Restaurantes a analizar:", options=("Todos","Solo Estrellas Michelin","Descartar Estrellas Michelin"))
+        if filtro_michelin=="Todos":
+             data_filtro_michelin=data
+        elif filtro_michelin=="Solo Estrellas Michelin":
+            data_filtro_michelin=data[data["Michelin"]==True]
+        elif filtro_michelin=="Descartar Estrellas Michelin":
+            data_filtro_michelin=data[data["Michelin"]==False]
+        if True:
+            st.error("AQUI HAY UN ERROR MIRAR GUADALARAJA CON ESTRELLAS MICHELIN")
+
+            print(chat_map(data_filtro_michelin[data_filtro_michelin["Provincia"]==provincia_input][["Longitude","Latitude"]], data_filtro_michelin[data_filtro_michelin["Provincia"]==provincia_input]["Longitude"].median(), data_filtro_michelin[data_filtro_michelin["Provincia"]==provincia_input]["Latitude"].median()))
+        else:
+            st.error("No existen restaurantes para estos filtros")
 
 
     with col2:
-        st.warning("Información adicional")
+        st.warning("**DATOS DE INTERÉS**")
         col2_1, col2_2= st.columns(2)
         with col2_1:
-            st.warning("Cantidad de Restaurantes")
-            st.warning("Estrellas Michelin")
-            st.warning("Precio medio")
-            st.warning("Precio mediano")
-            st.warning("Bookable")
+            st.warning("**Cantidad de Restaurantes**")
+            st.warning("**Estrellas Michelin**")
+            st.warning("**Precio medio**")
+            st.warning("**Precio mediano**")
+            st.warning("**Desviación estándar precio**")
+            st.warning("**Sistema reserva online**")
         with col2_2:
-            cantidad_restaurantes_data=str(len(data[data["Provincia"]==provincia_input]))
+            cantidad_restaurantes_data=str(len(data_filtro_michelin[data_filtro_michelin["Provincia"]==provincia_input]))
             st.warning(cantidad_restaurantes_data)
-            st.warning(len(data[(data["Provincia"]==provincia_input) & (data["Michelin"]==True)]))
-            st.warning(str(round(data[data["Provincia"]==provincia_input]["Average_Price"].mean(),2)) + "€")
-            st.warning(str(round(data[data["Provincia"]==provincia_input]["Average_Price"].median(),2)) + "€")
-            st.warning(str(len(data[(data["Provincia"]==provincia_input) & (data["Bookable"]==True)]))+"/"+cantidad_restaurantes_data)
+            try:
+                st.warning(len(data[(data_filtro_michelin["Provincia"]==provincia_input) & (data_filtro_michelin["Michelin"]==True)]))
+            except:
+                st.warning("0")
+            st.warning(str(round(data_filtro_michelin[data_filtro_michelin["Provincia"]==provincia_input]["Average_Price"].mean(),2)) + "€")
+            st.warning(str(round(data_filtro_michelin[data_filtro_michelin["Provincia"]==provincia_input]["Average_Price"].median(),2)) + "€")
+            st.warning(str(round(data_filtro_michelin[data_filtro_michelin["Provincia"]==provincia_input]["Average_Price"].std(),2)) + "€")
+            st.warning(str(len(data_filtro_michelin[(data_filtro_michelin["Provincia"]==provincia_input) & (data_filtro_michelin["Bookable"]==True)]))+"/"+cantidad_restaurantes_data)
     with col3:
-        st.warning("Gráficas de interés")
+        st.warning("**TIPO DE COMIDA**")
+        tipos_comida_chart(data_filtro_michelin, provincia_input)
         
+                
 
-        
+    st.divider()
 
 
     #Análisis de la competencia filtrando por sus datos
-    st.info("ANALIZE A TODA LA COMPETENCIA DE FORMA PERSONALIZADA")
+    st.subheader("Analice a toda la competencia de forma personalizada")
+    # st.info("ANALIZE A TODA LA COMPETENCIA DE FORMA PERSONALIZADA")
     with st.form("my_form"):
         st.info("Analize su competencia mediante este buscador")
-        slider_val = st.slider("Form slider")
-        checkbox_val = st.checkbox("Form checkbox")
+        slider_val = st.slider("Form slider", 0, 100, 50, 1)
         provincia_input= st.selectbox("Provincia", ("a","b"))
         estrella_mich_input=st.radio("¿Es una estrella Michelin?", options=("True","False"))
         tipo_comida_input=st.selectbox("Tipo de Restaurante", ("Italiano","Mexicano"))
@@ -132,3 +187,5 @@ elif selected == "Modelo IA":
         submitted = st.form_submit_button("Submit")
         if submitted:
             st.write("slider", provincia_input, "checkbox")
+
+st.image("img/footer.png", use_column_width=True)
