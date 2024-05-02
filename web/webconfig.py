@@ -1,7 +1,7 @@
 import streamlit as st
 import pydeck as pdk
 import streamlit.components.v1 as components
-import base64
+# import base64
 import plotly.express as px
 
 def chat_map(chart_data, long_inicial,lat_inicial):
