@@ -22,6 +22,7 @@ Este repositorio contiene los archivos y el código relacionados con el proyecto
 
 ## Objetivo del Proyecto
 
+# En los objetivos meter mas todavia !!!
 Investigar la relación entre el precio medio de un restaurante y sus características.
 
 ## Tecnologías Empleadas
@@ -35,6 +36,6 @@ Investigar la relación entre el precio medio de un restaurante y sus caracterí
 Este proyecto se ha desarrollado como parte de un trabajo académico para la asignatura de Proeycto de la UPV. Los datos utilizados son de acceso público y se han manipulado únicamente con fines educativos y de investigación.
 
 
-
+# Aqui meter una previsualización de la web
 ![Preview](url_de_la_imagen)
 
