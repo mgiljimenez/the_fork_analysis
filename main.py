@@ -53,7 +53,7 @@ if selected == "Inicio":
         container2.info("Nuestro Objetivo")
         col21, col22=st.columns(2)
         with col21:
-            container2.markdown("**¿Cúal es nuestro objetivo principal?**")
+            container2.markdown("**¿Cuál es nuestro objetivo principal?**")
             container2.write("Comprobar si existe una relación entre al precio medio del restaurante y características como su localización, renta per cápita, tipo de comida etc.")
         # container2.divider()
         with col22:
@@ -183,7 +183,7 @@ elif selected == "Datos":
 ############
 elif selected == "AED":
     datos_aed=aed(data)
-    st.title("Análisis Univariante")
+    st.title("Análisis Univariante",anchor=False)
     container1=st.container(border=True)
     col1, col2= container1.columns(2)
     with col1:
@@ -228,7 +228,7 @@ elif selected == "AED":
     container3.error("A la espera de que Pablo me pase los datos nuevos para conectar las gráficas, que yo no tengo comunidades")
     
 
-    st.title("Análisis Multivariante")
+    st.title("Análisis Multivariante",anchor=False)
 
     container_t_comida=st.container(border=True)
     container_t_comida.subheader("Tipo de comida según la comunidad",anchor=False)
@@ -280,8 +280,8 @@ elif selected == "AED":
 #PAGINA CONCLUSIÓN#
 ###################
 elif selected == "Conclusión":
-    st.title("Recordamos los objetivos y respondemos a cada uno de ellos")
-
+    st.title("Terminar esta página todavía",anchor=False)
+    st.image("img/conclusion.png", use_column_width=True)
 
 
 #################
