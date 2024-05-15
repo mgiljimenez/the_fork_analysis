@@ -4,13 +4,11 @@ from streamlit_pandas_profiling import st_profile_report
 import pandas as pd
 import numpy as np
 import pydeck as pdk
-from webconfig import chat_map,tipos_comida_chart, aed, filter_dataframe
+from webconfig import chat_map,tipos_comida_chart, aed, filter_dataframe, corr_bar
 import webbrowser
 
 
-
 data=pd.read_csv("./data_restaurantes_final.csv", sep=";", encoding="utf-8")
-
 
 
 st.set_page_config(
@@ -58,66 +56,70 @@ if selected == "Inicio":
             container2.write("- Desarrollar un buscador de restaurantes dadas ciertas características del restaurante")
             container2.write("- Integrar todo el AED, Conclusiones y Soluciones tecnológicas en una única página web​")
     
-    container3 = st.container(border=True)
-    container3.subheader("Alcance")
-    coltext, colimg = container3.columns([0.7,0.3])
+    # container3 = st.container(border=True)
+    st.info("ALCANCE")
+    coltext, colimg = st.columns([0.7,0.3])
     with coltext:
-        col3, col4=st.columns([0.3,0.7])
+        container4=st.container(border=True)
+        col3, col4=container4.columns([0.3,0.7])
         with col3:
-            st.info("Misión")
+            st.subheader("Misión")
         with col4:
             st.write("- Analizar las características que influyen en el precio medio de un restaurante.")
             st.write("- Aportar una solución tecnológica a empresarios en el sector hostelería.")
-        st.write(" ")
-        col5, col6=st.columns([0.3,0.7])
+        container5=st.container(border=True)
+        col5, col6=container5.columns([0.3,0.7])
         with col5:
-            st.info("Requisitos")
+            st.subheader("Requisitos")
         with col6:
             st.write("- AED detallado (Statgraphics y Python), Control de versiones git, No Powerpoint")
-        st.write(" ")
-        col7, col8=st.columns([0.3,0.7])
+        container6=st.container(border=True)
+        col7, col8=container6.columns([0.3,0.7])
         st.write("")
         with col7:
-            st.info("Restricciones")
+            st.subheader("Restricciones")
         with col8:
             st.write("- Entrega en junio")
             st.write("- Encontrar base de datos con mínimo 5000 restaurantes")
-        st.write(" ")
-        col9, col10=st.columns([0.3,0.7])
+        container7=st.container(border=True)
+        col9, col10=container7.columns([0.3,0.7])
         with col9:
-            st.info("Supuesto inicial")
+            st.subheader("Supuesto inicial")
         with col10:
             st.write("- Información en The Fork: Actualizada y verídica (sin conflicto de intereses)")
-        st.write(" ")
-        col11, col12=st.columns([0.3,0.7])
+        container8=st.container(border=True)
+        col11, col12=container8.columns([0.3,0.7])
         with col11:
-            st.info("Entregables")
+            st.subheader("Entregables")
         with col12:
             st.write("- Informe del alcance, cronograma, Informe adquisición y limpieza, Informe AED")
             st.write("- Web y Repositorio: webscraping, limpieza de datos, código de la web")
-        st.write(" ")
-        col13, col14=st.columns([0.3,0.7])
+        container9=st.container(border=True)
+        col13, col14=container9.columns([0.3,0.7])
         with col13:
-            st.info("Límites")
+            st.subheader("Límites")
         with col14:
             st.write("- No entramos en analizar platos ni menús")
             st.write("- La web sugerirá un precio medio para un restaurante, pero no el tipo de comida o localización del mismo")
-        st.write(" ")
-        col15, col16=st.columns([0.3,0.7])
+        container10=st.container(border=True)
+        col15, col16=container10.columns([0.3,0.7])
         with col15:
-            st.info("Criterios de éxito")
+            st.subheader("Criterios de éxito")
         with col16:
             st.write("- El AED confirma si existe o no una relación con el precio medio del restaurante")
             st.write("- La solución tecnológica es útil para los empresarios en el sector hostelería")
     with colimg:
         st.image("img/restaurant_vertical.jpg", use_column_width=True, clamp=False)
-    if container3.button("Accedede a más información detallada acerca del alcance", use_container_width=True):
-                webbrowser.open_new_tab("www.sincronity.com")
-    container4 = st.container(border=True)
-    container4.subheader("Cronograma")
-    container4.image("img/cronograma.png", use_column_width=True, clamp=False)
-    if container4.button("Accede a nuestro cronograma", use_container_width=True):
-                webbrowser.open_new_tab("www.sincronity.com")
+        if st.button("ACCEDE A MÁS INFORMACIÓN DETALLADA ACERCA DEL ALCANCE", use_container_width=True):
+            webbrowser.open_new_tab("www.sincronity.com")
+    with st.expander("CRONOGRAMA DEL PROYECTO"):
+        st.subheader("Cronograma")
+        st.image("img/cronograma.png", use_column_width=True, clamp=False)
+        if st.button("Accede a nuestro cronograma", use_container_width=True):
+                    webbrowser.open_new_tab("www.sincronity.com")
+##############
+#PAGINA DATOS#
+##############
 elif selected == "Datos":
     
     col1, col2 = st.columns(2)
@@ -147,6 +149,8 @@ elif selected == "Datos":
             st.write(f"Cantidad de nulos: {data[variable_select].isnull().sum()}")
         with col_data2:
             st.write("Tipo de variable: " + type(data[variable_select][0]).__name__)
+        container3.write(" ")
+        container3.write(" ")
 
     with col2:
         container2 = st.container(border=True)
@@ -164,22 +168,58 @@ elif selected == "Datos":
         container2.info("_Recodificación de variables_")
         container2.write("- **Rate_distinction:** Recodificación de categórica a cuantitativa discreta")
         container2.write("- **Michelin:** Recodificación de string (True/False) a Booleano")
-        container2.write(" ")
+        container2.write("- **Comunidad autónoma:** Creación de variable a partir de provincia")
 
-
+############
+#PAGINA AED#
+############
 elif selected == "AED":
     datos_aed=aed(data)
     st.title("Análisis Univariante")
-    col1, col2= st.columns(2)
+    container1=st.container(border=True)
+    col1, col2= container1.columns(2)
     with col1:
         datos_aed.histograma_precio_medio()
-        datos_aed.histograma_calificacion_comida()
-        datos_aed.histograma_calificacion_comida() #CAMBIAR POR ESTE: datos_aed.bar_comunidad_autonoma_salario_medio()
+        with st.expander("Información detallada"):
+            st.write("- **Eliminamos** los restaurantes con precio medio < 6€")
+            st.write("- Precio medio: Dispesión alta: **Rango 307 €**")
+            st.write("- **Asimetria positiva**")
+            st.write("- **Mediana** = 6€")
+            st.write("- **Curtosis** = 632 (forma leptocúrtica)")
     with col2:
         datos_aed.histograma_reservas_ultima_semana()
+        with st.expander("Información detallada"):
+            st.write("- Una de las variables **más dispersas**")
+            st.write("- **Coeficiente de variación=** 229%")
+            st.write("- **Rango=** 1133")
+            st.write("- **Asimetrís positiva**")
+            st.write("- **Valores atípicos** = 1133")
+            st.write("- **Curtosis** = 1014 (forma leptocúrtica)")
+
+
+    container2=st.container(border=True)
+    col3, col4= container2.columns(2)
+    with col3:
+        datos_aed.histograma_calificacion_comida()
+        with st.expander("Información detallada"):
+            st.write("- Rango de valores **no extenso** (4-10)")
+            st.write("- **Asimetría negativa**")
+    with col4:
         datos_aed.histograma_calificacion_comida() # ESTE SE PODRÍA CAMBIAR POR UNO NUEVO PARA QUE CUADRE
+        with st.expander("Información detallada"):
+            st.write("- Esta gráfica se puede sustituir por otra relevante para que cuadren pares")
+    container2.error("A la espera de que Pablo me pase los datos nuevos para conectar las gráficas, que yo no tengo comunidades")
+
+    container3=st.container(border=True)
+    col5, col6= container3.columns(2)
+    with col5:
+        datos_aed.histograma_calificacion_comida() #CAMBIAR POR ESTE: datos_aed.bar_comunidad_autonoma_salario_medio()
+
+    with col6:
         datos_aed.histograma_calificacion_comida() # CAMBIAR POR ESTE: datos_aed.bar_comunidad_autonoma_precio_medio()
-        
+    container3.error("A la espera de que Pablo me pase los datos nuevos para conectar las gráficas, que yo no tengo comunidades")
+    
+
     st.title("Análisis Multivariante")
 
     container_t_comida=st.container(border=True)
@@ -222,19 +262,23 @@ elif selected == "AED":
             color = 'background-color: #FFCCCC'
         return color
     #Tabla de la correlación de Pearson
-    styled_df = data_pearson.style.applymap(color_pearson, subset=['Correlación de Pearson'])
+    styled_df = data_pearson.style.map(color_pearson, subset=['Correlación de Pearson'])
     st.dataframe(styled_df, use_container_width=True)
     
-    if st.button("Accedede a más información detallada del AED", use_container_width=True):
+    if st.button("Accede a más información detallada del AED", use_container_width=True):
                 webbrowser.open_new_tab("www.sincronity.com")
 
+###################
+#PAGINA CONCLUSIÓN#
+###################
 elif selected == "Conclusión":
     st.title("Recordamos los objetivos y respondemos a cada uno de ellos")
 
 
 
-
-
+#################
+#PAGINA BUSCADOR#
+#################
 elif selected == "Buscador":
 
     container1 = st.container(border=True)
@@ -318,8 +362,15 @@ elif selected == "Buscador":
             st.warning(str(len(data_filtered_personalizado[data_filtro_michelin["Bookable"]==True]))+"/"+cantidad_restaurantes_data)
     with col6:
         st.warning("**TIPO DE COMIDA**")
-        # tipos_comida_chart(data_filtered_personalizado, "GENERAL")
-    st.dataframe(data_filtered_personalizado)
+        tipos_comida_chart(data_filtered_personalizado, "GENERAL")
+    with container2.expander("Mostrar correlación de datos actuales"):
+        corr_bar(data_filtered_personalizado)
+    with st.expander("Mostrar datos actuales"):
+        st.dataframe(data_filtered_personalizado)
+
+##################
+#PAGINA MODELO IA#
+##################
 elif selected == "Modelo IA":
     with st.form("form_prediccion"):
         st.info("¿Cuánto debería pagar un cliente de media en su restaurante?")
@@ -329,5 +380,4 @@ elif selected == "Modelo IA":
         # Every form must have a submit button.
         submitted = st.form_submit_button("Submit")
         if submitted:
-            st.write("slider", provincia_input, "checkbox")
-
+            st.write("En desarrollo - Miguel")

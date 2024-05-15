@@ -1,6 +1,7 @@
 import streamlit as st
 import pydeck as pdk
 import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
 from pandas.api.types import (
     is_categorical_dtype,
@@ -44,7 +45,7 @@ def tipos_comida_chart(data, provincia_input):
     # Filtrar los datos según la provincia y contar los tipos de comida
     data_graph_cir = data[data["Provincia"] == provincia_input].value_counts('Tipo_comida').head(5).reset_index(name='count')
     if provincia_input == 'GENERAL':
-        fig = px.pie(data, values='count', names='Tipo_comida', 
+        fig = px.pie(data.value_counts('Tipo_comida').head(5).reset_index(name='count'), values='count', names='Tipo_comida', 
                  title='5 tipos de comida más populares',
                  width=500, height=400)
     # Crear el gráfico de pastel
@@ -107,7 +108,8 @@ class aed:
                         labels={'Reservas_last_week': 'Reservas de la Última Semana'},
                         opacity=0.7, # Hacer el histograma un poco transparente
                         color_discrete_sequence=['orange'], # Cambiar el color de las barras
-                        template='plotly_white') # Cambiar el tema del gráfico
+                        template='plotly_white',
+                        width=500) # Cambiar el tema del gráfico
 
         # Ajustar los límites de los ejes x e y
         fig.update_xaxes(range=[0, 300]) 
@@ -133,7 +135,8 @@ class aed:
                         labels={'Average_Price': 'Precio Promedio'},
                         opacity=0.7, # Hacer el histograma un poco transparente
                         color_discrete_sequence=['blue'], # Cambiar el color de las barras
-                        template='plotly_white') # Cambiar el tema del gráfico
+                        template='plotly_white',
+                        width=500) # Cambiar el tema del gráfico
 
         # Ajustar los límites de los ejes x e y
         fig.update_xaxes(range=[0, self.data['Average_Price'].max()*1.1]) 
@@ -163,7 +166,8 @@ class aed:
                         labels={'Food_rating': 'Calificación de Comida'},
                         opacity=0.7, # Hacer el histograma un poco transparente
                         color_discrete_sequence=['purple'], # Cambiar el color de las barras
-                        template='plotly_white') # Cambiar el tema del gráfico
+                        template='plotly_white',
+                        width=500) # Cambiar el tema del gráfico
 
         # Ajustar los límites de los ejes x e y
         fig.update_xaxes(range=[0, self.data['Food_rating'].max()*1.1]) 
@@ -222,10 +226,11 @@ class aed:
         fig = px.bar(precio_medio_por_tipo_comida, 
                     x='Tipo_comida', 
                     y='Average_Price', 
-                    title='Precio Medio por Tipo de Comida',
+                    title='Precio Medio por Tipo de Comida Descendente',
                     labels={'Average_Price': 'Precio Medio (€) ', 'Tipo_comida': 'Tipo de comida'},
                     color='Tipo_comida',  # Colorear por tipo de comida
-                    template='plotly_white')  # Cambiar el tema del gráfico
+                    template='plotly_white',
+                    width=500)  # Cambiar el tema del gráfico
         # Ajustar el diseño del gráfico
         fig.update_layout(xaxis_title='Tipo de Comida',
                         yaxis_title='Precio Medio (€)',
@@ -242,10 +247,11 @@ class aed:
         fig = px.bar(precio_medio_por_tipo_comida, 
                     x='Tipo_comida', 
                     y='Average_Price', 
-                    title='Precio Medio por Tipo de Comida',
+                    title='Precio Medio por Tipo de Comida Ascendente',
                     labels={'Average_Price': 'Precio Medio (€) ', 'Tipo_comida': 'Tipo de comida'},
                     color='Tipo_comida',  # Colorear por tipo de comida
-                    template='plotly_white')  # Cambiar el tema del gráfico
+                    template='plotly_white',
+                    width=500)  # Cambiar el tema del gráfico
 
         # Ajustar el diseño del gráfico
         fig.update_layout(xaxis_title='Tipo de Comida',
@@ -405,3 +411,19 @@ def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
                         st.write(f"Error al filtrar por {column}")
 
         return df
+
+
+
+def corr_bar(data):
+    numeric_columns = data.select_dtypes(include=['float64', 'int64'])
+    correlation_series = numeric_columns.corr()["Average_Price"].abs().sort_values(ascending=False).drop("Average_Price")
+    
+    # Creamos un DataFrame con los resultados
+    correlation_df = pd.DataFrame(correlation_series, columns=["Average_Price"])
+    # Creamos el gráfico de barras horizontales con Plotly Express
+    fig = px.bar(correlation_df, x=correlation_df.index, y="Average_Price", orientation="v",
+                title="Correlación con Precio medio")
+    fig.update_traces(marker_color='rgb(158,202,225)', marker_line_color='rgb(8,48,107)',
+                    marker_line_width=1.5, opacity=0.6)
+    # Mostramos el gráfico en Streamlit
+    st.plotly_chart(fig)
