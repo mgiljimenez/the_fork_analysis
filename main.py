@@ -20,6 +20,14 @@ st.set_page_config(
 image, col_menu = st.columns((0.2,0.8))
 with image:
     st.image("img/logo_the_fork_trans.png", width=200, clamp=False)
+hide_img_fs = '''
+<style>
+button[title="View fullscreen"]{
+    visibility: hidden;}
+</style>
+'''
+
+st.markdown(hide_img_fs, unsafe_allow_html=True)
 
 with col_menu:
     selected = option_menu(None, ["Inicio","Datos","AED", "Conclusión", 'Buscador','Modelo IA'], 
@@ -63,48 +71,48 @@ if selected == "Inicio":
         container4=st.container(border=True)
         col3, col4=container4.columns([0.3,0.7])
         with col3:
-            st.subheader("Misión")
+            st.subheader("Misión",anchor=False)
         with col4:
             st.write("- Analizar las características que influyen en el precio medio de un restaurante.")
             st.write("- Aportar una solución tecnológica a empresarios en el sector hostelería.")
         container5=st.container(border=True)
         col5, col6=container5.columns([0.3,0.7])
         with col5:
-            st.subheader("Requisitos")
+            st.subheader("Requisitos",anchor=False)
         with col6:
             st.write("- AED detallado (Statgraphics y Python), Control de versiones git, No Powerpoint")
         container6=st.container(border=True)
         col7, col8=container6.columns([0.3,0.7])
         st.write("")
         with col7:
-            st.subheader("Restricciones")
+            st.subheader("Restricciones",anchor=False)
         with col8:
             st.write("- Entrega en junio")
             st.write("- Encontrar base de datos con mínimo 5000 restaurantes")
         container7=st.container(border=True)
         col9, col10=container7.columns([0.3,0.7])
         with col9:
-            st.subheader("Supuesto inicial")
+            st.subheader("Supuesto inicial",anchor=False)
         with col10:
             st.write("- Información en The Fork: Actualizada y verídica (sin conflicto de intereses)")
         container8=st.container(border=True)
         col11, col12=container8.columns([0.3,0.7])
         with col11:
-            st.subheader("Entregables")
+            st.subheader("Entregables",anchor=False)
         with col12:
             st.write("- Informe del alcance, cronograma, Informe adquisición y limpieza, Informe AED")
             st.write("- Web y Repositorio: webscraping, limpieza de datos, código de la web")
         container9=st.container(border=True)
         col13, col14=container9.columns([0.3,0.7])
         with col13:
-            st.subheader("Límites")
+            st.subheader("Límites",anchor=False)
         with col14:
             st.write("- No entramos en analizar platos ni menús")
             st.write("- La web sugerirá un precio medio para un restaurante, pero no el tipo de comida o localización del mismo")
         container10=st.container(border=True)
         col15, col16=container10.columns([0.3,0.7])
         with col15:
-            st.subheader("Criterios de éxito")
+            st.subheader("Criterios de éxito",anchor=False)
         with col16:
             st.write("- El AED confirma si existe o no una relación con el precio medio del restaurante")
             st.write("- La solución tecnológica es útil para los empresarios en el sector hostelería")
@@ -113,7 +121,7 @@ if selected == "Inicio":
         if st.button("ACCEDE A MÁS INFORMACIÓN DETALLADA ACERCA DEL ALCANCE", use_container_width=True):
             webbrowser.open_new_tab("www.sincronity.com")
     with st.expander("CRONOGRAMA DEL PROYECTO"):
-        st.subheader("Cronograma")
+        st.subheader("Cronograma",anchor=False)
         st.image("img/cronograma.png", use_column_width=True, clamp=False)
         if st.button("Accede a nuestro cronograma", use_container_width=True):
                     webbrowser.open_new_tab("www.sincronity.com")
@@ -125,7 +133,7 @@ elif selected == "Datos":
     col1, col2 = st.columns(2)
     with col1:
         container1 = st.container(border=True)
-        container1.subheader("OBTENCIÓN DE DATOS")
+        container1.subheader("OBTENCIÓN DE DATOS",anchor=False)
         container1.image("img/webscrapping.png", use_column_width=True, clamp=False)
         tabla_webscrapping=pd.DataFrame({"BBDD":["Restaurantes","Población por Provincia","Salarios medios anuales"],"Fuente":["Scrapping THE FORK","INE","INE"],"Comentarios":["Python, Selenium,BeautifulSoup, Request, JSON","Sin datos faltantes","Datos faltantes"]})
         container1.table(tabla_webscrapping)
@@ -140,7 +148,7 @@ elif selected == "Datos":
             if st.button("INFORME ADQUISICIÓN Y LIMPIEZA", use_container_width=True):
                 webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis/blob/main/Adquisicion_Tratamiento_Datos.pdf")
         container3=st.container(border=True)
-        container3.subheader("¿Cuáles son nuestras variables?")
+        container3.subheader("¿Cuáles son nuestras variables?",anchor=False)
         listar_variables=list(data.columns).copy()
         listar_variables.pop(0)
         variable_select=container3.selectbox("Variable", listar_variables)
@@ -154,7 +162,7 @@ elif selected == "Datos":
 
     with col2:
         container2 = st.container(border=True)
-        container2.subheader("LIMPIEZA Y TRANSFORMACIÓN DE DATOS")
+        container2.subheader("LIMPIEZA Y TRANSFORMACIÓN DE DATOS",anchor=False)
         container2.image("img/restaurant_analysis.png", use_column_width=True,clamp=False)
         container2.info("_Datos faltantes_")
         container2.write("- **Rate_distinction:** Nulos con significado: No tratado")
@@ -223,7 +231,7 @@ elif selected == "AED":
     st.title("Análisis Multivariante")
 
     container_t_comida=st.container(border=True)
-    container_t_comida.subheader("Tipo de comida según la comunidad")
+    container_t_comida.subheader("Tipo de comida según la comunidad",anchor=False)
     col_t1, col_t2=container_t_comida.columns([0.2,0.8])
     with col_t1:
         #Tabla con la relación de Lugar-Bandera
@@ -283,7 +291,7 @@ elif selected == "Buscador":
 
     container1 = st.container(border=True)
     #Análisis de la competencia de una sola provincia
-    container1.subheader("Analice a toda la competencia de su provincia")
+    container1.subheader("Analice a toda la competencia de su provincia",anchor=False)
     # st.info("ANALIZE A TODA LA COMPETENCIA DE SU PROVINCIA")
     col1, col2, col3 = container1.columns(3)
     with col1:
@@ -331,7 +339,7 @@ elif selected == "Buscador":
 
 
     #Análisis de la competencia filtrando por sus datos
-    st.subheader("Analice a toda la competencia de forma personalizada")
+    st.subheader("Analice a toda la competencia de forma personalizada",anchor=False)
     data_filtered_personalizado=filter_dataframe(data)
 
     container2 = st.container(border=True)
