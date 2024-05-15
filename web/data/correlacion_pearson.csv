@@ -1,0 +1,15 @@
+Variable 1;Variable 2;Correlación de Pearson
+Precio medio;Salario medio;0.03
+Distinción;Valoración de comida;0.83
+Precio medio;Valoración de comida*;0.22
+Número de premios ;Precio medio;0.55
+Reservas en una semana;Restaurantes Michelín*;0.07
+Estella Michelín;Precio medio;0.59
+Servicio;Ambiente;0.79
+Reservas en una semana;Valoración de comida;0.09
+Número de comentarios;Número de fotos;0.1
+Número de fotos;Valoraciones;0.1
+Número de comentarios;Valoraciones;0.98
+Población;Cantidad de restaurantes;0.91
+Salario medio;Cantidad de restaurantes;0.32
+Salario medio;Población;0.43
