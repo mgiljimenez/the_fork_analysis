@@ -134,11 +134,11 @@ elif selected == "Datos":
         with col11:
             st.metric("Nº Restaurantes", "7562")
             if st.button("CÓDIGO DEL WEBSCRAPING", use_container_width=True):
-                webbrowser.open_new_tab("www.sincronity.com")
+                webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
         with col12:
             st.metric("Nº variables", "27") 
             if st.button("INFORME ADQUISICIÓN Y LIMPIEZA", use_container_width=True):
-                webbrowser.open_new_tab("www.sincronity.com")
+                webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis/blob/main/Adquisicion_Tratamiento_Datos.pdf")
         container3=st.container(border=True)
         container3.subheader("¿Cuáles son nuestras variables?")
         listar_variables=list(data.columns).copy()
