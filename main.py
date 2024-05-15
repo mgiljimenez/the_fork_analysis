@@ -262,7 +262,7 @@ elif selected == "AED":
             color = 'background-color: #FFCCCC'
         return color
     #Tabla de la correlación de Pearson
-    styled_df = data_pearson.style.map(color_pearson, subset=['Correlación de Pearson'])
+    styled_df = data_pearson.style.applymap(color_pearson, subset=['Correlación de Pearson'])
     st.dataframe(styled_df, use_container_width=True)
     
     if st.button("Accede a más información detallada del AED", use_container_width=True):
