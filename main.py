@@ -17,7 +17,7 @@ st.set_page_config(
     layout="wide",
 )
 
-image, col_menu = st.columns((0.15,0.85))
+image, col_menu = st.columns((0.2,0.8))
 with image:
     st.image("img/logo_the_fork_trans.png", width=200, clamp=False)
 
