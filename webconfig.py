@@ -196,7 +196,7 @@ class aed:
         # Ajustar el diseño del gráfico
         fig.update_layout(xaxis_title='Comunidad Autónoma',
                         yaxis_title='Salario Medio Anual (€)',
-                        yaxis_tickformat='.3s')  # Establecer el formato de los ticks del eje y
+                        yaxis_tickformat='.3s', width=500)  # Establecer el formato de los ticks del eje y
 
         # Mostrar el histograma
         st.plotly_chart(fig)
@@ -215,7 +215,7 @@ class aed:
 
         # Ajustar el diseño del gráfico
         fig.update_layout(xaxis_title='Comunidad Autónoma',
-                        yaxis_title='Precio Promedio (€)')
+                        yaxis_title='Precio Promedio (€)', width=500) 
 
         # Mostrar el histograma
         st.plotly_chart(fig)
@@ -235,7 +235,7 @@ class aed:
         fig.update_layout(xaxis_title='Tipo de Comida',
                         yaxis_title='Precio Medio (€)',
                         yaxis_tickformat='.1f',
-                        showlegend= False)
+                        showlegend= False, width=500)
         # fig.update_xaxes(range= [-0.5, 15.5])
         # Mostrar el histograma
         st.plotly_chart(fig)

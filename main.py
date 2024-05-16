@@ -8,7 +8,7 @@ from webconfig import chat_map,tipos_comida_chart, aed, filter_dataframe, corr_b
 import webbrowser
 
 
-data=pd.read_csv("./data_restaurantes_final.csv", sep=";", encoding="utf-8")
+data=pd.read_csv("./data_restaurantes_definitivo.csv", sep=";", encoding="utf-8")
 
 
 st.set_page_config(
@@ -140,11 +140,11 @@ elif selected == "Datos":
         container3=st.container(border=True)
         col11, col12 = container3.columns(2)
         with col11:
-            st.metric("Nº Restaurantes", "7562")
+            st.metric("Nº Restaurantes", len(data))
             if st.button("CÓDIGO DEL WEBSCRAPING", use_container_width=True):
                 webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
         with col12:
-            st.metric("Nº variables", "27") 
+            st.metric("Nº variables", len(data.columns)-1) 
             if st.button("INFORME ADQUISICIÓN Y LIMPIEZA", use_container_width=True):
                 webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis/blob/main/Adquisicion_Tratamiento_Datos.pdf")
         container3=st.container(border=True)
@@ -216,16 +216,14 @@ elif selected == "AED":
         datos_aed.histograma_calificacion_comida() # ESTE SE PODRÍA CAMBIAR POR UNO NUEVO PARA QUE CUADRE
         with st.expander("Información detallada"):
             st.write("- Esta gráfica se puede sustituir por otra relevante para que cuadren pares")
-    container2.error("A la espera de que Pablo me pase los datos nuevos para conectar las gráficas, que yo no tengo comunidades")
+    container2.error("Falta introducir una gráfica nueva")
 
     container3=st.container(border=True)
     col5, col6= container3.columns(2)
     with col5:
-        datos_aed.histograma_calificacion_comida() #CAMBIAR POR ESTE: datos_aed.bar_comunidad_autonoma_salario_medio()
-
+        datos_aed.bar_comunidad_autonoma_salario_medio()
     with col6:
-        datos_aed.histograma_calificacion_comida() # CAMBIAR POR ESTE: datos_aed.bar_comunidad_autonoma_precio_medio()
-    container3.error("A la espera de que Pablo me pase los datos nuevos para conectar las gráficas, que yo no tengo comunidades")
+        datos_aed.bar_comunidad_autonoma_precio_medio() 
     
 
     st.title("Análisis Multivariante",anchor=False)
@@ -292,7 +290,6 @@ elif selected == "Buscador":
     container1 = st.container(border=True)
     #Análisis de la competencia de una sola provincia
     container1.subheader("Analice a toda la competencia de su provincia",anchor=False)
-    # st.info("ANALIZE A TODA LA COMPETENCIA DE SU PROVINCIA")
     col1, col2, col3 = container1.columns(3)
     with col1:
         with st.expander("Opciones de Filtro"):
@@ -308,7 +305,6 @@ elif selected == "Buscador":
             chat_map(data_filtro_michelin[data_filtro_michelin["Provincia"]==provincia_input][["Longitude","Latitude"]], data_filtro_michelin[data_filtro_michelin["Provincia"]==provincia_input]["Longitude"].median(), data_filtro_michelin[data_filtro_michelin["Provincia"]==provincia_input]["Latitude"].median())
         except:
             st.error("No existen restaurantes para estos filtros")
-
 
     with col2:
         st.warning("**DATOS DE INTERÉS**")
