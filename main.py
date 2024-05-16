@@ -401,6 +401,7 @@ elif selected == "Buscador":
 #PAGINA MODELO IA#
 ##################
 elif selected == "Modelo IA":
+    st.error("Esta página está en desarrollo y no es funcional actualmente")
     with st.form("form_prediccion"):
         st.info("¿Cuánto debería pagar un cliente de media en su restaurante?")
         provincia_input= st.selectbox("Seleccione su provincia", sorted(data["Provincia"].unique()), index=6)
