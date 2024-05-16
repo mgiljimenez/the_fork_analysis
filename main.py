@@ -279,7 +279,7 @@ elif selected == "AED":
     def color_pearson(value):
         if float(value) >= 0.75:
             color = 'background-color: lightgreen'
-        elif float(value) >= 0.43
+        elif float(value) >= 0.43:
             color = 'background-color: yellow'
         else:
             color = 'background-color: #FFCCCC'
