@@ -411,3 +411,11 @@ elif selected == "Modelo IA":
         submitted = st.form_submit_button("Submit")
         if submitted:
             st.write("En desarrollo - Miguel")
+    st.error("La siguiente tabla es temporal y hay que eliminarla. Eliminar csv banderas_borrar.csv")
+    data_banderas_1=pd.read_csv("data/banderas_borrar.csv", sep=";") 
+    st.dataframe(data_banderas_1,column_config={
+            "BANDERA": st.column_config.ImageColumn(
+                "BANDERA", help="Streamlit app preview screenshots"
+            ),"BANDERA ": st.column_config.ImageColumn(
+                "BANDERA ", help="Streamlit app preview screenshots"
+            )}, hide_index=True, use_container_width=True)
