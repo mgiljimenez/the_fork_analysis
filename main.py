@@ -184,17 +184,9 @@ elif selected == "Datos":
 elif selected == "AED":
     datos_aed=aed(data)
     st.title("Análisis Univariante",anchor=False)
-    container1=st.container(border=True)
-    col1, col2= container1.columns(2)
-    with col1:
-        datos_aed.histograma_precio_medio()
-        with st.expander("Información detallada"):
-            st.write("- **Eliminamos** los restaurantes con precio medio < 6€")
-            st.write("- Precio medio: Dispesión alta: **Rango 307 €**")
-            st.write("- **Asimetria positiva**")
-            st.write("- **Mediana** = 6€")
-            st.write("- **Curtosis** = 632 (forma leptocúrtica)")
-    with col2:
+    container0=st.container(border=True)
+    col0, col00=container0.columns(2)
+    with col0:
         datos_aed.histograma_reservas_ultima_semana()
         with st.expander("Información detallada"):
             st.write("- Una de las variables **más dispersas**")
@@ -203,6 +195,31 @@ elif selected == "AED":
             st.write("- **Asimetrís positiva**")
             st.write("- **Valores atípicos** = 1133")
             st.write("- **Curtosis** = 1014 (forma leptocúrtica)")
+
+    with col00:
+        datos_aed.pie_reservable()
+        
+    container_medio=st.container(border=True)
+    col_medio1, col_medio2=container_medio.columns(2)
+    with col_medio1:
+        datos_aed.histograma_precio_medio()
+        with st.expander("Información detallada"):
+            st.write("- **Eliminamos** los restaurantes con precio medio < 6€")
+            st.write("- Precio medio: Dispesión alta: **Rango 307 €**")
+            st.write("- **Asimetria positiva**")
+            st.write("- **Mediana** = 6€")
+            st.write("- **Curtosis** = 632 (forma leptocúrtica)")
+        
+
+    with col_medio2:
+        datos_aed.pie_michelin()
+
+    container1=st.container(border=True)
+    col1, col2= container1.columns(2)
+    with col1:
+        datos_aed.histograma_numero_fotos()
+    with col2:
+        datos_aed.histograma_metodos_pago()
 
 
     container2=st.container(border=True)
@@ -270,6 +287,14 @@ elif selected == "AED":
     #Tabla de la correlación de Pearson
     styled_df = data_pearson.style.applymap(color_pearson, subset=['Correlación de Pearson'])
     st.dataframe(styled_df, use_container_width=True)
+    container_pearson=st.container(border=True)
+    colfrase, colnum=container_pearson.columns([0.85,0.15])
+    with colfrase:
+        st.write("**¿Poca correlación entre salario medio por comunidad y precio medio del restaurante?**")
+        st.write("Este dato nos sorprendió mucho, y al investigarlo a fondo, nos dimos cuenta de que se debía a que los salarios eran uno por cada provincia (49 únicos) y los precios medios eran uno por restaurante (7650 únicos), por lo que no eran comparables. Para comprobar si realmente existía relación, calculamos este comparando los salarios medios con la media de precios por cada provincia. Y entonces observamos una correlación de 0.43 (14 veces más!!) que se adecuaba más a lo que nos esperábamos.", wide=True)
+    with colnum:
+        st.metric(label="Correlación", value=round(datos_aed.correlacion_precio_medio_salario_medio(),3), delta="1400%")
+
     
     if st.button("Accede a más información detallada del AED", use_container_width=True):
                 webbrowser.open_new_tab("www.sincronity.com")

@@ -270,7 +270,7 @@ class aed:
                     )
 
         # Configurar el título centrado
-        fig.update_layout(title_text='Distribución de Michelin', title_x=0.49)
+        fig.update_layout(title_text='Distribución de Michelin', title_x=0.49, width=500)
 
 
         # Mostrar el diagrama de sectores
@@ -284,7 +284,7 @@ class aed:
                     color_discrete_sequence=['lightseagreen', 'pink'])
 
         # Configurar el título centrado
-        fig.update_layout(title_text='Distribución de reservable', title_x=0.49)
+        fig.update_layout(title_text='Distribución de reservable', title_x=0.49, width=500)
 
         # Mostrar el diagrama de sectores
         st.plotly_chart(fig)
@@ -301,7 +301,7 @@ class aed:
 
 
         # Configurar el título centrado
-        fig.update_layout(title_text='Distribución de métodos de pago', title_x=0.49, bargap= 0.1)
+        fig.update_layout(title_text='Distribución de métodos de pago', title_x=0.49, bargap= 0.1, width=500)
 
         # Mostrar el diagrama de sectores
         st.plotly_chart(fig)
@@ -318,10 +318,17 @@ class aed:
 
 
         # Configurar el título centrado
-        fig.update_layout(title_text='Distribución de numero de fotos', title_x=0.49)
+        fig.update_layout(title_text='Distribución de numero de fotos', title_x=0.49, width=500)
 
         # Mostrar el diagrama de sectores
         st.plotly_chart(fig)
+    def correlacion_precio_medio_salario_medio(self):
+        # Primero, calculamos la media de los precios medios por provincia
+        media_precios_por_provincia = self.data.groupby('Provincia')['Average_Price'].mean()
+        # Luego, calculamos el salario medio anual por provincia
+        salario_medio_por_provincia = self.data.groupby('Provincia')['Salario Medio Anual'].mean()
+        # Finalmente, calculamos la correlación entre estas dos series de datos
+        return media_precios_por_provincia.corr(salario_medio_por_provincia)
 
 def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         """
