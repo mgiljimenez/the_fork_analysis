@@ -279,19 +279,19 @@ elif selected == "AED":
     def color_pearson(value):
         if float(value) >= 0.75:
             color = 'background-color: lightgreen'
-        elif float(value) >= 0.43:
+        elif float(value) >= 0.43
             color = 'background-color: yellow'
         else:
             color = 'background-color: #FFCCCC'
         return color
     #Tabla de la correlación de Pearson
-    styled_df = data_pearson.style.applymap(color_pearson, subset=['Correlación de Pearson'])
+    styled_df = data_pearson.style.applymap(color_pearson, subset=['Correlación de Pearson']).format({'Correlación de Pearson': '{:.2f}'})
     st.dataframe(styled_df, use_container_width=True)
     container_pearson=st.container(border=True)
     colfrase, colnum=container_pearson.columns([0.85,0.15])
     with colfrase:
         st.write("**¿Poca correlación entre salario medio por comunidad y precio medio del restaurante?**")
-        st.write("Este dato nos sorprendió mucho, y al investigarlo a fondo, nos dimos cuenta de que se debía a que los salarios eran uno por cada provincia (49 únicos) y los precios medios eran uno por restaurante (7650 únicos), por lo que no eran comparables. Para comprobar si realmente existía relación, calculamos este comparando los salarios medios con la media de precios por cada provincia. Y entonces observamos una correlación de 0.43 (14 veces más!!) que se adecuaba más a lo que nos esperábamos.", wide=True)
+        st.write("Este dato nos sorprendió mucho, y al investigarlo a fondo, nos dimos cuenta de que se debía a que los salarios eran uno por cada provincia (49 únicos) y los precios medios eran uno por restaurante (7650 únicos), por lo que no eran comparables. Para comprobar si realmente existía relación, calculamos este comparando los salarios medios con la media de precios por cada provincia. Y entonces observamos una correlación de 0.43 (14 veces más!!) que se adecuaba más a lo que nos esperábamos.")
     with colnum:
         st.metric(label="Correlación", value=round(datos_aed.correlacion_precio_medio_salario_medio(),3), delta="1400%")
 
