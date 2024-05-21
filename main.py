@@ -83,7 +83,6 @@ if selected == "Inicio":
             st.write("- AED detallado (Statgraphics y Python), Control de versiones git, No Powerpoint")
         container6=st.container(border=True)
         col7, col8=container6.columns([0.3,0.7])
-        st.write("")
         with col7:
             st.subheader("Restricciones",anchor=False)
         with col8:
