@@ -401,24 +401,17 @@ elif selected == "Modelo IA":
     with st.form("form_prediccion"):
         st.info("¿Cuánto debería pagar un cliente de media en su restaurante?")
         provincia_input= st.selectbox("Seleccione su provincia", sorted(data["Provincia"].unique()), index=6)
-        # bookable_input=
-        # zipcode_input=
-        # longitude_input=
-        # latitude_input=
-        # cantidad_metodos_pago_input=
-        # reservas_today_input=
-        # reservas_last_week_input=
-        # rate_distinction_input=
-        # numero_fotos_input=
-        # is_affiliated_input=
-        # numero_awards_input=
-        # review_count_input=
-        # rating_count_input=
-        # food_rating_input=
-        # service_rating_input=
-        # ambience_rating_input=
-        # tipo_comida_input=
-        # salario_medio_anual_input=
-        # comunidad_autonoma_input=
-        # michelin_numerico_input=
-        # submit_button = st.form_submit_button(label='Enviar')
+        st.number_input("nws")
+
+        # Every form must have a submit button.
+        submitted = st.form_submit_button("Submit")
+        if submitted:
+            st.write("En desarrollo - Miguel")
+    st.error("La siguiente tabla es temporal y hay que eliminarla. Eliminar csv banderas_borrar.csv")
+    data_banderas_1=pd.read_csv("data/banderas_borrar.csv", sep=";") 
+    st.dataframe(data_banderas_1,column_config={
+            "BANDERA": st.column_config.ImageColumn(
+                "BANDERA", help="Streamlit app preview screenshots"
+            ),"BANDERA ": st.column_config.ImageColumn(
+                "BANDERA ", help="Streamlit app preview screenshots"
+            )}, hide_index=True, use_container_width=True)
