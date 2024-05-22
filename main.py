@@ -83,7 +83,6 @@ if selected == "Inicio":
             st.write("- AED detallado (Statgraphics y Python), Control de versiones git, No Powerpoint")
         container6=st.container(border=True)
         col7, col8=container6.columns([0.3,0.7])
-        st.write("")
         with col7:
             st.subheader("Restricciones",anchor=False)
         with col8:
@@ -119,17 +118,16 @@ if selected == "Inicio":
     with colimg:
         st.image("img/restaurant_vertical.jpg", use_column_width=True, clamp=False)
         if st.button("ACCEDE A MÁS INFORMACIÓN DETALLADA ACERCA DEL ALCANCE", use_container_width=True):
-            webbrowser.open_new_tab("www.sincronity.com")
+            webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
     with st.expander("CRONOGRAMA DEL PROYECTO"):
         st.subheader("Cronograma",anchor=False)
         st.image("img/cronograma.png", use_column_width=True, clamp=False)
         if st.button("Accede a nuestro cronograma", use_container_width=True):
-                    webbrowser.open_new_tab("www.sincronity.com")
+                    webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
 ##############
 #PAGINA DATOS#
 ##############
 elif selected == "Datos":
-    
     col1, col2 = st.columns(2)
     with col1:
         container1 = st.container(border=True)
@@ -141,12 +139,10 @@ elif selected == "Datos":
         col11, col12 = container3.columns(2)
         with col11:
             st.metric("Nº Restaurantes", len(data))
-            if st.button("CÓDIGO DEL WEBSCRAPING", use_container_width=True):
-                webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
         with col12:
             st.metric("Nº variables", len(data.columns)-1) 
-            if st.button("INFORME ADQUISICIÓN Y LIMPIEZA", use_container_width=True):
-                webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis/blob/main/Adquisicion_Tratamiento_Datos.pdf")
+        if container3.button("ACCEDE AL CÓDGIDO WEBSCRAPING E INFORME DE ADQUISICIÓN Y LIMPIEZA DE DATOS", use_container_width=True):
+            webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
         container3=st.container(border=True)
         container3.subheader("¿Cuáles son nuestras variables?",anchor=False)
         listar_variables=list(data.columns).copy()
@@ -297,7 +293,7 @@ elif selected == "AED":
 
     
     if st.button("Accede a más información detallada del AED", use_container_width=True):
-                webbrowser.open_new_tab("www.sincronity.com")
+                webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
 
 ###################
 #PAGINA CONCLUSIÓN#
@@ -395,7 +391,7 @@ elif selected == "Buscador":
     with container2.expander("Mostrar correlación de datos actuales"):
         corr_bar(data_filtered_personalizado)
     with st.expander("Mostrar datos actuales"):
-        st.dataframe(data_filtered_personalizado)
+        st.dataframe(data_filtered_personalizado.drop(columns=["Unnamed: 0"]))
 
 ##################
 #PAGINA MODELO IA#
@@ -405,17 +401,24 @@ elif selected == "Modelo IA":
     with st.form("form_prediccion"):
         st.info("¿Cuánto debería pagar un cliente de media en su restaurante?")
         provincia_input= st.selectbox("Seleccione su provincia", sorted(data["Provincia"].unique()), index=6)
-        st.number_input("nws")
-
-        # Every form must have a submit button.
-        submitted = st.form_submit_button("Submit")
-        if submitted:
-            st.write("En desarrollo - Miguel")
-    st.error("La siguiente tabla es temporal y hay que eliminarla. Eliminar csv banderas_borrar.csv")
-    data_banderas_1=pd.read_csv("data/banderas_borrar.csv", sep=";") 
-    st.dataframe(data_banderas_1,column_config={
-            "BANDERA": st.column_config.ImageColumn(
-                "BANDERA", help="Streamlit app preview screenshots"
-            ),"BANDERA ": st.column_config.ImageColumn(
-                "BANDERA ", help="Streamlit app preview screenshots"
-            )}, hide_index=True, use_container_width=True)
+        # bookable_input=
+        # zipcode_input=
+        # longitude_input=
+        # latitude_input=
+        # cantidad_metodos_pago_input=
+        # reservas_today_input=
+        # reservas_last_week_input=
+        # rate_distinction_input=
+        # numero_fotos_input=
+        # is_affiliated_input=
+        # numero_awards_input=
+        # review_count_input=
+        # rating_count_input=
+        # food_rating_input=
+        # service_rating_input=
+        # ambience_rating_input=
+        # tipo_comida_input=
+        # salario_medio_anual_input=
+        # comunidad_autonoma_input=
+        # michelin_numerico_input=
+        # submit_button = st.form_submit_button(label='Enviar')
