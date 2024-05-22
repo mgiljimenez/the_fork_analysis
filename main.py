@@ -106,6 +106,7 @@ if selected == "Inicio":
         with col13:
             st.subheader("Límites",anchor=False)
         with col14:
+            
             st.write("- No entramos en analizar platos ni menús")
             st.write("- La web sugerirá un precio medio para un restaurante, pero no el tipo de comida o localización del mismo")
         container10=st.container(border=True)
