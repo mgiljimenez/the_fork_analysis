@@ -4,11 +4,11 @@ from streamlit_option_menu import option_menu
 import pandas as pd
 #### import numpy as np
 #### import pydeck as pdk
-from webconfig import chat_map,tipos_comida_chart, aed, filter_dataframe, corr_bar
+from webconfig.webconfig import chat_map,tipos_comida_chart, aed, filter_dataframe, corr_bar
 import webbrowser
 
 
-data=pd.read_csv("./data_restaurantes_definitivo.csv", sep=";", encoding="utf-8")
+data=pd.read_csv("datos/data_restaurantes_definitivo.csv", sep=";", encoding="utf-8")
 
 
 st.set_page_config(
@@ -19,7 +19,7 @@ st.set_page_config(
 
 image, col_menu = st.columns((0.2,0.8))
 with image:
-    st.image("img/logo_the_fork_trans.png", width=200, clamp=False)
+    st.image("webconfig/img/logo_the_fork_trans.png", width=200, clamp=False)
 hide_img_fs = '''
 <style>
 button[title="View fullscreen"]{
@@ -43,10 +43,10 @@ if selected == "Inicio":
     with col1:
         container1 = st.container(border=True)
         container1.info("Nuestro Equipo")
-        container1.image("img/componentes_grupo.png", use_column_width=True, clamp=False)
+        container1.image("webconfig/img/componentes_grupo.png", use_column_width=True, clamp=False)
         container1.write(" ")
         container1.write(" ")
-        container1.image("img/foto_restaurante.jpg", use_column_width=True, clamp=False)
+        container1.image("webconfig/img/foto_restaurante.jpg", use_column_width=True, clamp=False)
 
     with col2:
         container2 = st.container(border=True)
@@ -116,12 +116,12 @@ if selected == "Inicio":
             st.write("- El AED confirma si existe o no una relación con el precio medio del restaurante")
             st.write("- La solución tecnológica es útil para los empresarios en el sector hostelería")
     with colimg:
-        st.image("img/restaurant_vertical.jpg", use_column_width=True, clamp=False)
+        st.image("webconfig/img/restaurant_vertical.jpg", use_column_width=True, clamp=False)
         if st.button("ACCEDE A MÁS INFORMACIÓN DETALLADA ACERCA DEL ALCANCE", use_container_width=True):
             webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
     with st.expander("CRONOGRAMA DEL PROYECTO"):
         st.subheader("Cronograma",anchor=False)
-        st.image("img/cronograma.png", use_column_width=True, clamp=False)
+        st.image("webconfig/img/cronograma.png", use_column_width=True, clamp=False)
         if st.button("Accede a nuestro cronograma", use_container_width=True):
                     webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
 ##############
@@ -132,7 +132,7 @@ elif selected == "Datos":
     with col1:
         container1 = st.container(border=True)
         container1.subheader("OBTENCIÓN DE DATOS",anchor=False)
-        container1.image("img/webscrapping.png", use_column_width=True, clamp=False)
+        container1.image("webconfig/img/webscrapping.png", use_column_width=True, clamp=False)
         tabla_webscrapping=pd.DataFrame({"BBDD":["Restaurantes","Población por Provincia","Salarios medios anuales"],"Fuente":["Scrapping THE FORK","INE","INE"],"Comentarios":["Python, Selenium,BeautifulSoup, Request, JSON","Sin datos faltantes","Datos faltantes"]})
         container1.table(tabla_webscrapping)
         container3=st.container(border=True)
@@ -159,7 +159,7 @@ elif selected == "Datos":
     with col2:
         container2 = st.container(border=True)
         container2.subheader("LIMPIEZA Y TRANSFORMACIÓN DE DATOS",anchor=False)
-        container2.image("img/restaurant_analysis.png", use_column_width=True,clamp=False)
+        container2.image("webconfig/img/restaurant_analysis.png", use_column_width=True,clamp=False)
         container2.info("_Datos faltantes_")
         container2.write("- **Rate_distinction:** Nulos con significado: No tratado")
         container2.write("- **Precio_medio:** Imputados a mano con búsqueda manual en Google")
@@ -246,14 +246,14 @@ elif selected == "AED":
     col_t1, col_t2=container_t_comida.columns([0.2,0.8])
     with col_t1:
         #Tabla con la relación de Lugar-Bandera
-        data_banderas=pd.read_csv("data/banderas.csv", sep=";") 
+        data_banderas=pd.read_csv("webconfig/data/banderas.csv", sep=";") 
         st.dataframe(data_banderas,column_config={
             "BANDERA": st.column_config.ImageColumn(
                 "BANDERA", help="Streamlit app preview screenshots"
             )}, hide_index=True, use_container_width=True)
     with col_t2:
         #Tabla con la relación Comunidad-Origen de la comida
-        data_comida=pd.read_csv("data/comida_consumida.csv", sep=";")
+        data_comida=pd.read_csv("webconfig/data/comida_consumida.csv", sep=";")
         st.dataframe(data_comida,column_config={
             "COMIDA MÁS CONSUMIDA 1": st.column_config.ImageColumn(
                 "COMIDA MÁS CONSUMIDA 1", help="Streamlit app preview screenshots"
@@ -264,14 +264,14 @@ elif selected == "AED":
             ),"COMIDA MENOS CONSUMIDA 2": st.column_config.ImageColumn(
                 "COMIDA MENOS CONSUMIDA 2", help="Streamlit app preview screenshots"
             )}, hide_index=True, use_container_width=True)
-        st.image("img/footer.png", use_column_width=True, clamp=False)
+        st.image("webconfig/img/footer.png", use_column_width=True, clamp=False)
     
     col_comida1, col_comida2=st.columns(2)
     with col_comida1:
         datos_aed.bar_precio_medio_tipo_comida_descendente()
     with col_comida2:
         datos_aed.bar_precio_medio_tipo_comida_ascendente()
-    data_pearson=pd.read_csv("data/correlacion_pearson.csv", sep=";")
+    data_pearson=pd.read_csv("webconfig/data/correlacion_pearson.csv", sep=";")
     def color_pearson(value):
         if float(value) >= 0.75:
             color = 'background-color: lightgreen'
@@ -300,7 +300,7 @@ elif selected == "AED":
 ###################
 elif selected == "Conclusión":
     st.title("Terminar esta página todavía",anchor=False)
-    st.image("img/conclusion.png", use_column_width=True)
+    st.image("webconfig/img/conclusion.png", use_column_width=True)
 
 
 #################
@@ -408,10 +408,3 @@ elif selected == "Modelo IA":
         if submitted:
             st.write("En desarrollo - Miguel")
     st.error("La siguiente tabla es temporal y hay que eliminarla. Eliminar csv banderas_borrar.csv")
-    data_banderas_1=pd.read_csv("data/banderas_borrar.csv", sep=";") 
-    st.dataframe(data_banderas_1,column_config={
-            "BANDERA": st.column_config.ImageColumn(
-                "BANDERA", help="Streamlit app preview screenshots"
-            ),"BANDERA ": st.column_config.ImageColumn(
-                "BANDERA ", help="Streamlit app preview screenshots"
-            )}, hide_index=True, use_container_width=True)
