@@ -117,8 +117,9 @@ if selected == "Inicio":
             st.write("- La solución tecnológica es útil para los empresarios en el sector hostelería")
     with colimg:
         st.image("webconfig/img/restaurant_vertical.jpg", use_column_width=True, clamp=False)
-        if st.button("ACCEDE A MÁS INFORMACIÓN DETALLADA ACERCA DEL ALCANCE", use_container_width=True):
-            webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
+        st.link_button("ACCEDE A MÁS INFORMACIÓN DETALLADA ACERCA DEL ALCANCE", "https://github.com/mgiljimenez/the_fork_analysis", use_container_width=True)
+        # if st.button("ACCEDE A MÁS INFORMACIÓN DETALLADA ACERCA DEL ALCANCE", use_container_width=True):
+        #     webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
     with st.expander("CRONOGRAMA DEL PROYECTO"):
         st.subheader("Cronograma",anchor=False)
         st.image("webconfig/img/cronograma.png", use_column_width=True, clamp=False)

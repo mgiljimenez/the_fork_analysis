@@ -38,4 +38,3 @@ Este proyecto se ha desarrollado como parte de un trabajo académico para la asi
 
 # Aqui meter una previsualización de la web
 ![Preview](url_de_la_imagen)
-
