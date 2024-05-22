@@ -8,6 +8,8 @@ from pandas.api.types import (
     is_datetime64_any_dtype,
     is_numeric_dtype,
     is_object_dtype)
+import numpy as np
+from sklearn.linear_model import LinearRegression
 
 
 def chat_map(chart_data, long_inicial,lat_inicial):
@@ -329,6 +331,27 @@ class aed:
         salario_medio_por_provincia = self.data.groupby('Provincia')['Salario Medio Anual'].mean()
         # Finalmente, calculamos la correlación entre estas dos series de datos
         return media_precios_por_provincia.corr(salario_medio_por_provincia)
+    # Crear el gráfico de dispersión con Plotly Express
+    def scatter_poblacion_restaurantes_provincia(self):
+        data= self.data.copy()
+        data['Cantidad_Restaurantes'] = data['Provincia'].map(dict(data['Provincia'].value_counts()))
+        model = LinearRegression().fit(data[['Poblacion']], data['Cantidad_Restaurantes'])
+        x_values= np.linspace(0, 7000000, 10000)
+        y_values = model.coef_*x_values + model.intercept_
+
+        data['Cantidad_Restaurantes'] = data.groupby('Provincia')['Provincia'].transform('count')
+
+        fig = px.scatter(data, x='Poblacion', y='Cantidad_Restaurantes', color='Provincia', 
+                    hover_name='Provincia', title='Cantidad de Restaurantes por Población por Provincia', trendline= 'expanding', width=500)
+        fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='lines', name='Recta', line={'width': 1, 'color': 'black'}))
+
+    # Añadir etiquetas a los ejes
+        fig.update_layout(xaxis_title='Población',
+                        
+                    yaxis_title='Cantidad de Restaurantes por Provincia')
+
+    # Mostrar el gráfico
+        st.plotly_chart(fig)
 
 def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         """
@@ -434,3 +457,4 @@ def corr_bar(data):
                     marker_line_width=1.5, opacity=0.6)
     # Mostramos el gráfico en Streamlit
     st.plotly_chart(fig)
+
