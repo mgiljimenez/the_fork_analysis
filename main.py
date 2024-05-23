@@ -119,13 +119,10 @@ if selected == "Inicio":
     with colimg:
         st.image("webconfig/img/restaurant_vertical.jpg", use_column_width=True, clamp=False)
         st.link_button("ACCEDE A MÁS INFORMACIÓN DETALLADA ACERCA DEL ALCANCE", "https://github.com/mgiljimenez/the_fork_analysis", use_container_width=True)
-        # if st.button("ACCEDE A MÁS INFORMACIÓN DETALLADA ACERCA DEL ALCANCE", use_container_width=True):
-        #     webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
     with st.expander("CRONOGRAMA DEL PROYECTO"):
         st.subheader("Cronograma",anchor=False)
         st.image("webconfig/img/cronograma.png", use_column_width=True, clamp=False)
-        if st.button("Accede a nuestro cronograma", use_container_width=True):
-                    webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
+        st.link_button("Accede a nuestro cronograma","https://github.com/mgiljimenez/the_fork_analysis", use_container_width=True)
 ##############
 #PAGINA DATOS#
 ##############
@@ -143,8 +140,7 @@ elif selected == "Datos":
             st.metric("Nº Restaurantes", len(data))
         with col12:
             st.metric("Nº variables", len(data.columns)-1) 
-        if container3.button("ACCEDE AL CÓDGIDO WEBSCRAPING E INFORME DE ADQUISICIÓN Y LIMPIEZA DE DATOS", use_container_width=True):
-            webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
+        container3.link_button("ACCEDE AL CÓDGIDO WEBSCRAPING E INFORME DE ADQUISICIÓN Y LIMPIEZA DE DATOS","https://github.com/mgiljimenez/the_fork_analysis", use_container_width=True)
         container3=st.container(border=True)
         container3.subheader("¿Cuáles son nuestras variables?",anchor=False)
         listar_variables=list(data.columns).copy()
@@ -293,9 +289,8 @@ elif selected == "AED":
     with colnum:
         st.metric(label="Correlación", value=round(datos_aed.correlacion_precio_medio_salario_medio(),3), delta="1400%")
 
-    
-    if st.button("Accede a más información detallada del AED", use_container_width=True):
-                webbrowser.open_new_tab("https://github.com/mgiljimenez/the_fork_analysis")
+    st.link_button("Accede a más información detallada del AED","https://github.com/mgiljimenez/the_fork_analysis", use_container_width=True)
+
 
 ###################
 #PAGINA CONCLUSIÓN#
