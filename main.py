@@ -10,7 +10,6 @@ import webbrowser
 
 data=pd.read_csv("datos/data_restaurantes_definitivo.csv", sep=";", encoding="utf-8")
 
-
 st.set_page_config(
     page_title="Proyecto Restaurantes",
     page_icon="chart_with_upwards_trend",
@@ -106,7 +105,6 @@ if selected == "Inicio":
         with col13:
             st.subheader("Límites",anchor=False)
         with col14:
-            
             st.write("- No entramos en analizar platos ni menús")
             st.write("- La web sugerirá un precio medio para un restaurante, pero no el tipo de comida o localización del mismo")
         container10=st.container(border=True)
@@ -186,7 +184,7 @@ elif selected == "AED":
             st.write("- Una de las variables **más dispersas**")
             st.write("- **Coeficiente de variación=** 229%")
             st.write("- **Rango=** 1133")
-            st.write("- **Asimetrís positiva**")
+            st.write("- **Asimetría positiva**")
             st.write("- **Valores atípicos** = 1133")
             st.write("- **Curtosis** = 1014 (forma leptocúrtica)")
 
@@ -224,10 +222,9 @@ elif selected == "AED":
             st.write("- Rango de valores **no extenso** (4-10)")
             st.write("- **Asimetría negativa**")
     with col4:
-        datos_aed.histograma_calificacion_comida() # ESTE SE PODRÍA CAMBIAR POR UNO NUEVO PARA QUE CUADRE
+        datos_aed.scatter_poblacion_restaurantes_provincia()
         with st.expander("Información detallada"):
             st.write("- Esta gráfica se puede sustituir por otra relevante para que cuadren pares")
-    container2.error("Falta introducir una gráfica nueva")
 
     container3=st.container(border=True)
     col5, col6= container3.columns(2)
