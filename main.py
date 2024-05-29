@@ -454,6 +454,6 @@ elif selected == "Modelo IA":
 
 
         # Every form must have a submit button.
-        submitted = st.form_submit_button("Submit")
+        submitted = st.form_submit_button("Submit", use_container_width=True)
         if submitted:
             st.write("En desarrollo - Miguel")
