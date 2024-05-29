@@ -402,4 +402,3 @@ elif selected == "Modelo IA":
         submitted = st.form_submit_button("Submit")
         if submitted:
             st.write("En desarrollo - Miguel")
-    st.error("La siguiente tabla es temporal y hay que eliminarla. Eliminar csv banderas_borrar.csv")
