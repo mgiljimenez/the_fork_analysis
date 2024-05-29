@@ -224,7 +224,8 @@ elif selected == "AED":
     with col4:
         datos_aed.scatter_poblacion_restaurantes_provincia()
         with st.expander("Información detallada"):
-            st.write("- Esta gráfica se puede sustituir por otra relevante para que cuadren pares")
+            st.write("- Este gráfico de puntos recoge los datos de la cantidad de restaurantes por provincias")
+            st.write("- La línea de tendencia muestra que estas variables siguen una relación proporcional y totalmente lineal, es decir, cuanta más población hay en una provincia, más cantidad de restaurantes posee.")
 
     container3=st.container(border=True)
     col5, col6= container3.columns(2)
