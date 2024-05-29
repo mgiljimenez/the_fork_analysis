@@ -395,19 +395,10 @@ elif selected == "Modelo IA":
     st.error("Esta página está en desarrollo y no es funcional actualmente")
     with st.form("form_prediccion"):
         st.info("¿Cuánto debería pagar un cliente de media en su restaurante?")
-        col1, col2, coll3 = st.columns(3)
+        col1, col2, col3 = st.columns(3)
         with col1:
-            st.radio("Sistema de reserva online", options=[True, False])
-            st.number_input("Cantidad métodos de pago", min_value=0)
-            st.number_input("Reservas última semana", min_value=0)
-            st.number_input("Número de fotos online", min_value=0)
-            st.radio("Afiliado a The Fork", options=[True, False])
-            st.number_input("Número de premios", min_value=0)
-            st.number_input("Número de comentarios", min_value=0)
-            st.number_input("Número de reseñas", min_value=0)
-            st.slider("Calidad de comida", min_value=0.0, max_value=10.0)
-            st.slider("Calidad del servicio", min_value=0.0, max_value=10.0)
-            st.slider("Calidad del ambiente", min_value=0.0, max_value=10.0)
+            st.selectbox("Provincia", sorted(['madrid', 'barcelona', 'valencia', 'sevilla', 'malaga', 'alicante',
+                            'islas baleares']))
             st.selectbox("Tipo de comida", sorted(['Colombian', 'Fusion', 'Asian', 'Mexican', 'Japanese',
                         'Mediterranean', 'Indian', 'American', 'Moroccan', 'Spanish',
                         'International', 'French', 'Brazilian', 'Steakhouse', 'Peruvian',
@@ -426,13 +417,23 @@ elif selected == "Modelo IA":
                         'Dutch', 'Syrian', 'From the Pyrenees', 'Siciliano', 'British',
                         'Swiss', 'Pakistani', 'Alsatian', 'Chilean', 'Belgian',
                         'Uruguayan', 'Emiliano', 'Traditionala', 'From Murcia', 'Regional']))
-            st.selectbox("Provincia", sorted(['madrid', 'barcelona', 'valencia', 'sevilla', 'malaga', 'alicante',
-                            'islas baleares']))
-            
             st.radio("Es Michelin", options=[True, False])
+            st.radio("Sistema de reserva online", options=[True, False])
+            st.radio("Afiliado a The Fork", options=[True, False])
+            
+        with col2:
+            st.number_input("Reservas última semana", min_value=0)
+            st.slider("Calidad de comida", min_value=0.0, max_value=10.0)
+            st.slider("Calidad del servicio", min_value=0.0, max_value=10.0)
+            st.slider("Calidad del ambiente", min_value=0.0, max_value=10.0)
             st.selectbox("Restaurante con distinción", [None,1,2,3])
-        
 
+        with col3:
+            st.number_input("Número de premios", min_value=0)
+            st.number_input("Número de comentarios", min_value=0)
+            st.number_input("Número de reseñas", min_value=0)
+            st.number_input("Número de fotos online", min_value=0)
+            st.number_input("Cantidad métodos de pago", min_value=0)
 # "Sistema de reserva online"
 # "Cantidad métodos de pago"
 # "Reservas última semana"
