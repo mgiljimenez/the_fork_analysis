@@ -456,4 +456,4 @@ elif selected == "Modelo IA":
             data_to_predict_df = pd.DataFrame(data_to_predict)
             model=joblib.load("models/model_cities/random_forest_model.pkl")
             result=model.predict(data_to_predict_df)
-            st.info(f"Precio medio recomendado: {round(result[0],2)}")
+            st.info(f"Precio medio recomendado: {round(result[0],2)}€")
