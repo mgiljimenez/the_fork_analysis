@@ -452,8 +452,8 @@ elif selected == "Modelo IA":
             "Food_rating":[8.0],"Service_rating":[6.0],"Ambience_rating":[9.0],
             "Provincia":["madrid"],"Poblacion": [dic_sal_pob["madrid"][1]],"Salario Medio Anual": [dic_sal_pob["madrid"][0]],
             "Michelin numérico":[True],"Rate_Distinction_numérico":[1],"Tipo_comida":["Colombian"]}
-            
+
             data_to_predict_df = pd.DataFrame(data_to_predict)
             model=joblib.load("models/model_cities/random_forest_model.pkl")
             result=model.predict(data_to_predict_df)
-            st.info(result)
+            st.info(result[0])
