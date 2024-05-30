@@ -49,7 +49,7 @@ if selected == "Inicio":
         video_file = open('webconfig/img/video_presentacion.mp4', 'rb')
         video_bytes = video_file.read()
 
-        st.video(video_bytes)
+        container1.video(video_bytes)
 
     with col2:
         container2 = st.container(border=True)
