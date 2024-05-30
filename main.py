@@ -294,7 +294,6 @@ elif selected == "AED":
 #PAGINA CONCLUSIÓN#
 ###################
 elif selected == "Conclusión":
-    st.title("Terminar esta página todavía",anchor=False)
     st.image("webconfig/img/conclusion.png", use_column_width=True)
 
 
@@ -397,9 +396,9 @@ elif selected == "Modelo IA":
         st.info("¿Cuánto debería pagar un cliente de media en su restaurante?")
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.selectbox("Provincia", sorted(['madrid', 'barcelona', 'valencia', 'sevilla', 'malaga', 'alicante',
+            provincia_in=st.selectbox("Provincia", sorted(['madrid', 'barcelona', 'valencia', 'sevilla', 'malaga', 'alicante',
                             'islas baleares']))
-            st.selectbox("Tipo de comida", sorted(['Colombian', 'Fusion', 'Asian', 'Mexican', 'Japanese',
+            tipo_comida_in=st.selectbox("Tipo de comida", sorted(['Colombian', 'Fusion', 'Asian', 'Mexican', 'Japanese',
                         'Mediterranean', 'Indian', 'American', 'Moroccan', 'Spanish',
                         'International', 'French', 'Brazilian', 'Steakhouse', 'Peruvian',
                         'Vegetarian', 'Italian', 'Traditional cuisine', 'From Canarias',
@@ -417,40 +416,29 @@ elif selected == "Modelo IA":
                         'Dutch', 'Syrian', 'From the Pyrenees', 'Siciliano', 'British',
                         'Swiss', 'Pakistani', 'Alsatian', 'Chilean', 'Belgian',
                         'Uruguayan', 'Emiliano', 'Traditionala', 'From Murcia', 'Regional']))
-            st.radio("Es Michelin", options=[True, False])
-            st.radio("Sistema de reserva online", options=[True, False])
-            st.radio("Afiliado a The Fork", options=[True, False])
+            michelin_in=st.radio("Es Michelin", options=[True, False])
+            sistema_reserva_in=st.radio("Sistema de reserva online", options=[True, False])
+            afiliado_in=st.radio("Afiliado a The Fork", options=[True, False])
             
         with col2:
-            st.number_input("Reservas última semana", min_value=0)
-            st.slider("Calidad de comida", min_value=0.0, max_value=10.0)
-            st.slider("Calidad del servicio", min_value=0.0, max_value=10.0)
-            st.slider("Calidad del ambiente", min_value=0.0, max_value=10.0)
-            st.selectbox("Restaurante con distinción", [None,1,2,3])
+            reservas_semana_in=st.number_input("Reservas última semana", min_value=0)
+            calidad_comida_in=st.slider("Calidad de comida", min_value=0.0, max_value=10.0)
+            calidad_servicio_in=st.slider("Calidad del servicio", min_value=0.0, max_value=10.0)
+            calidad_ambiente_in=st.slider("Calidad del ambiente", min_value=0.0, max_value=10.0)
+            distincion_in=st.selectbox("Restaurante con distinción", [None,1,2,3])
 
         with col3:
-            st.number_input("Número de premios", min_value=0)
-            st.number_input("Número de comentarios", min_value=0)
-            st.number_input("Número de reseñas", min_value=0)
-            st.number_input("Número de fotos online", min_value=0)
-            st.number_input("Cantidad métodos de pago", min_value=0)
-# "Sistema de reserva online"
-# "Cantidad métodos de pago"
-# "Reservas última semana"
-# "Número de fotos online"
-# "Afiliado a The Fork"
-# "Número de premios"
-# "Número de comentarios"
-# "Número de reseñas"
-# "Calidad de comida"
-# "Calidad del servicio"
-# "Calidad del ambiente"
-# "Tipo de comida"
-# "Provincia"
-# "Población"
-# "Salario Medio Anual"
-# "Es Michelin"
-# "Restaurante con distinción"
+            num_premios_in=st.number_input("Número de premios", min_value=0)
+            num_comentarios_in=st.number_input("Número de comentarios", min_value=0)
+            num_resena_in=st.number_input("Número de reseñas", min_value=0)
+            num_foto_in=st.number_input("Número de fotos online", min_value=0)
+            num_metodo_pago_in=st.number_input("Cantidad métodos de pago", min_value=0)
+        {"Sistema de reserva online": [sistema_reserva_in],"Cantidad métodos de pago":[num_metodo_pago_in],
+         "Reservas última semana":reservas_semana_in,"Número de fotos online":num_foto_in,"Afiliado a The Fork":afiliado_in,
+         "Número de premios":num_premios_in,"Número de comentarios":num_comentarios_in,"Número de reseñas":num_resena_in,
+         "Calidad de comida":calidad_comida_in,"Calidad del servicio":calidad_servicio_in,"Calidad del ambiente":calidad_ambiente_in,
+         "Provincia":provincia_in,"Población": "FALTA POBLACION","Salario Medio Anual": "FALTA SALARIO MEDIO",
+         "Es Michelin":michelin_in,"Restaurante con distinción":distincion_in}
 
 
         # Every form must have a submit button.
