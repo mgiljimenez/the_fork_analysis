@@ -46,7 +46,10 @@ if selected == "Inicio":
         container1.image("webconfig/img/componentes_grupo.png", use_column_width=True, clamp=False)
         container1.write(" ")
         container1.write(" ")
-        container1.image("webconfig/img/foto_restaurante.jpg", use_column_width=True, clamp=False)
+        video_file = open('video_presentacion.mp4', 'rb')
+        video_bytes = video_file.read()
+
+        st.video(video_bytes)
 
     with col2:
         container2 = st.container(border=True)
