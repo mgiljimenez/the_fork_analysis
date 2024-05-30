@@ -392,7 +392,7 @@ elif selected == "Buscador":
 #PAGINA MODELO IA#
 ##################
 elif selected == "Modelo IA":
-    st.error("Esta página está en desarrollo y no es funcional actualmente")
+    st.error("ESTA PÁGINA ESTÁ TODAVÍA EN DESARROLLO")
     with st.form("form_prediccion"):
         st.info("¿Cuánto debería pagar un cliente de media en su restaurante?")
         col1, col2, col3 = st.columns(3)
