@@ -136,7 +136,7 @@ elif selected == "Datos":
             st.metric("Nº Restaurantes", len(data))
         with col12:
             st.metric("Nº variables", len(data.columns)-1) 
-        container3.link_button("ACCEDE AL CÓDGIDO WEBSCRAPING E INFORME DE ADQUISICIÓN Y LIMPIEZA DE DATOS","https://github.com/mgiljimenez/the_fork_analysis", use_container_width=True)
+        container3.link_button("ACCEDE AL CÓDIDO WEBSCRAPING E INFORME DE ADQUISICIÓN Y LIMPIEZA DE DATOS","https://github.com/mgiljimenez/the_fork_analysis", use_container_width=True)
         container3=st.container(border=True)
         container3.subheader("¿Cuáles son nuestras variables?",anchor=False)
         listar_variables=list(data.columns).copy()
