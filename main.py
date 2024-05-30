@@ -1,11 +1,7 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-# ###from streamlit_pandas_profiling import st_profile_report
 import pandas as pd
-#### import numpy as np
-#### import pydeck as pdk
 from webconfig.webconfig import chat_map,tipos_comida_chart, aed, filter_dataframe, corr_bar
-import webbrowser
 import joblib
 
 
@@ -55,7 +51,7 @@ if selected == "Inicio":
         col21, col22=st.columns(2)
         with col21:
             container2.markdown("**¿Cuál es nuestro objetivo principal?**")
-            container2.write("Comprobar si existe una relación entre al precio medio del restaurante y características como su localización, renta per cápita, tipo de comida etc.")
+            container2.write("Comprobar si existe una relación entre el precio medio del restaurante y características como su localización, renta per cápita, tipo de comida etc.")
         # container2.divider()
         with col22:
             container2.markdown("**¿Cuáles son nuestros objetivos específicos?**")
