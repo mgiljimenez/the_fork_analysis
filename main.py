@@ -440,12 +440,19 @@ elif selected == "Modelo IA":
         submitted = st.form_submit_button("Submit", use_container_width=True)
         if submitted:
             dic_sal_pob={"madrid":[26721,6751251],"barcelona":[24243,5714730],"valencia":[20069,2589312],"sevilla":[17710,1947852],"malaga":[17390,1695651],"alicante":[17139,1881762],"islas baleares":[19834,1173008]}
-            data_to_predict={"Bookable": [sistema_reserva_in],"Cantidad_metodos_pago":[num_metodo_pago_in],
-            "Reservas_last_week":[reservas_semana_in],"Numero_fotos":[num_foto_in],"Is_Affiliated":[afiliado_in],
-            "Numero_awards":[num_premios_in],"Review_count":[float(num_comentarios_in)],"Rating_count":[float(num_resena_in)],
-            "Food_rating":[calidad_comida_in],"Service_rating":[calidad_servicio_in],"Ambience_rating":[calidad_ambiente_in],
-            "Provincia":[provincia_in],"Poblacion": [dic_sal_pob[provincia_in][1]],"Salario Medio Anual": [dic_sal_pob[provincia_in][0]],
-            "Michelin numérico":[michelin_in],"Rate_Distinction_numérico":[distincion_in],"Tipo_comida":[tipo_comida_in]}
+            # data_to_predict={"Bookable": [sistema_reserva_in],"Cantidad_metodos_pago":[num_metodo_pago_in],
+            # "Reservas_last_week":[reservas_semana_in],"Numero_fotos":[num_foto_in],"Is_Affiliated":[afiliado_in],
+            # "Numero_awards":[num_premios_in],"Review_count":[float(num_comentarios_in)],"Rating_count":[float(num_resena_in)],
+            # "Food_rating":[calidad_comida_in],"Service_rating":[calidad_servicio_in],"Ambience_rating":[calidad_ambiente_in],
+            # "Provincia":[provincia_in],"Poblacion": [dic_sal_pob[provincia_in][1]],"Salario Medio Anual": [dic_sal_pob[provincia_in][0]],
+            # "Michelin numérico":[michelin_in],"Rate_Distinction_numérico":[distincion_in],"Tipo_comida":[tipo_comida_in]}
+            data_to_predict={"Bookable": [True],"Cantidad_metodos_pago":[3],
+            "Reservas_last_week":[34],"Numero_fotos":[34],"Is_Affiliated":[True],
+            "Numero_awards":[2],"Review_count":[float(35)],"Rating_count":[float(355)],
+            "Food_rating":[8.0],"Service_rating":[6.0],"Ambience_rating":[9.0],
+            "Provincia":["madrid"],"Poblacion": [dic_sal_pob["madrid"][1]],"Salario Medio Anual": [dic_sal_pob["madrid"][0]],
+            "Michelin numérico":[True],"Rate_Distinction_numérico":[1],"Tipo_comida":["Colombian"]}
+            
             data_to_predict_df = pd.DataFrame(data_to_predict)
             model=joblib.load("models/model_cities/random_forest_model.pkl")
             result=model.predict(data_to_predict_df)
