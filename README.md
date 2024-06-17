@@ -17,6 +17,7 @@ Este repositorio contiene los archivos y el código relacionados con el proyecto
 - **Datos/**: Código del webscraping y datos obtenidos
 - **Informe_Proyecto.pdf**: Informe Final entregable para la evaluación de la asignatura
 - **Webconfig/**: Código de configuración de la aplicación web. Imágenes y datos de la web.
+- **Models/**: Modelos predictivos del precio medio de un restaurante
 - **README.md/**: Documento actual
 - **main.py/**: Ejecutable de la web
 
