@@ -389,7 +389,6 @@ elif selected == "Buscador":
 #PAGINA MODELO IA#
 ##################
 elif selected == "Modelo IA":
-    st.error("ESTA PÁGINA ESTÁ TODAVÍA EN DESARROLLO")
     with st.form("form_prediccion"):
         st.info("¿Cuánto debería pagar un cliente de media en su restaurante?")
         col1, col2, col3 = st.columns(3)
@@ -448,3 +447,10 @@ elif selected == "Modelo IA":
             model=joblib.load("models/model_cities/random_forest_model.pkl")
             result=model.predict(data_to_predict_df)
             st.info(f"Precio medio recomendado: {round(result[0],2)}€")
+    col1, col2 = st.columns([0.2,0.8])
+    with col1:
+        st.write("- **Modelo 1**: Linear Regression")
+        st.write("- **Modelo 2**: Random Forest")
+        st.write("- **Modelo 3**: XGBoost")
+    with col2:
+        st.image("webconfig/img/voting_regressor.png", use_column_width=True)
