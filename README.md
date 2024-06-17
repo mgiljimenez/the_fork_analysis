@@ -40,7 +40,7 @@ Este proyecto se ha desarrollado como parte de un trabajo académico para la asi
 
 # Accede a nuestra página web!
 [Accede mediante ese enlace](https://thefork.streamlit.app/)
-![Preview](webconfig\img\prevista_web.PNG)
+![Preview](webconfig/img/prevista_web.PNG)
 
 # ¿Cómo ejecutar la página web al copiar el repositorio?
 ```
