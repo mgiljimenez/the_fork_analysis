@@ -40,7 +40,7 @@ if selected == "Inicio":
         container1 = st.container(border=True)
         container1.info("Nuestro Equipo")
         container1.image("webconfig/img/componentes_grupo.png", use_column_width=True, clamp=False)
-        video_file = open('webconfig/img/video_presentacion.mp4', 'rb')
+        video_file = open('video_presentacion.mp4', 'rb')
         video_bytes = video_file.read()
 
         container1.video(video_bytes)
