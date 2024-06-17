@@ -452,5 +452,9 @@ elif selected == "Modelo IA":
         st.write("- **Modelo 1**: Linear Regression")
         st.write("- **Modelo 2**: Random Forest")
         st.write("- **Modelo 3**: XGBoost")
+        st.write("")
+        st.write("- Posiblemente comete underfitting")
+        st.write("- Mean Squared Error: 256.45527905737436")
+        st.write("- Root Mean Squared Error: 16.014221150507893")
     with col2:
         st.image("webconfig/img/voting_regressor.png", use_column_width=True)
