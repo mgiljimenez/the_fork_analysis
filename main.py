@@ -26,8 +26,8 @@ button[title="View fullscreen"]{
 st.markdown(hide_img_fs, unsafe_allow_html=True)
 
 with col_menu:
-    selected = option_menu(None, ["Inicio","Datos","AED", "Conclusión", 'Buscador','Modelo IA'], 
-        icons=['house','database-down' ,'graph-up', "folder2-open", 'search','app-indicator'], 
+    selected = option_menu(None, ["Inicio","Datos","AED", 'Buscador','Modelo IA', "Conclusión"], 
+        icons=['house','database-down' ,'graph-up', 'search','app-indicator', "folder2-open"], 
         menu_icon="cast", default_index=0, orientation="horizontal")
 
 ###############
